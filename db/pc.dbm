@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+         Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="0.9.1" last-position="0,108" last-zoom="1"
+	 default-schema="public" default-owner="postgres">
+<database name="new_database" is-template="false" allow-conns="true">
+</database>
+
+<schema name="public" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<table name="product">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="60" y="100"/>
+	<column name="maker">
+		<type name="varchar" length="10"/>
+	</column>
+	<column name="model" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="type">
+		<type name="varchar" length="50"/>
+	</column>
+	<constraint name="pk_model" type="pk-constr" table="public.product">
+		<columns names="model" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="pc">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="60" y="240"/>
+	<column name="code">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="model">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="speed">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="ram">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="hd">
+		<type name="real" length="0"/>
+	</column>
+	<column name="cd">
+		<type name="varchar" length="10"/>
+	</column>
+	<column name="price">
+		<type name="money" length="0"/>
+	</column>
+</table>
+
+<constraint name="fk_model" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.product" table="public.pc">
+	<columns names="model" ref-type="src-columns"/>
+	<columns names="model" ref-type="dst-columns"/>
+</constraint>
+
+<relationship name="rel_pc_product" type="relfk"
+	 src-table="public.pc"
+	 dst-table="public.product" reference-fk="fk_model"
+	 src-required="false" dst-required="false"/>
+
+</dbmodel>
